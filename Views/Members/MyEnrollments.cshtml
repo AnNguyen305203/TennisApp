@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TennisApp.Models.Enrollment>
+
+<h2>My Enrollments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Coach</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var enrollment in Model)
+        {
+            <tr>
+                <td>@enrollment.Schedule.EventName</td>
+                <td>@enrollment.Schedule.Date.ToShortDateString()</td>
+                <td>@enrollment.Schedule.Location</td>
+                <td>@enrollment.Schedule.Coach.FirstName @enrollment.Schedule.Coach.LastName</td>
+            </tr>
+        }
+    </tbody>
+</table>

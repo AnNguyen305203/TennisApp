@@ -1,0 +1,42 @@
+﻿@model TennisApp.Models.CoachDashboardViewModel
+
+<h2>Coach Dashboard</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="EditProfile">Edit Profile</a>
+    <a class="btn btn-success" asp-action="UpcomingSchedules">View Upcoming Schedules</a>
+</p>
+
+<p><strong>First Name:</strong> @Model.Coach.FirstName</p>
+<p><strong>Last Name:</strong> @Model.Coach.LastName</p>
+<p><strong>Biography:</strong> @Model.Coach.Biography</p>
+
+@if (Model.Schedules.Any())
+{
+    <h3>My Schedules</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in Model.Schedules)
+            {
+                <tr>
+                    <td>@schedule.EventName</td>
+                    <td>@schedule.Date.ToShortDateString()</td>
+                    <td>
+                        <a class="btn btn-info" asp-action="EnrolledMembers" asp-route-scheduleId="@schedule.ScheduleID">View Enrolled Members</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No upcoming schedules.</p>
+}

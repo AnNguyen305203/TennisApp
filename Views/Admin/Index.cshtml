@@ -1,0 +1,34 @@
+﻿@model IEnumerable<TennisApp.Models.Schedule>
+
+<h2>Manage Schedules</h2>
+<p>Welcome to the Admin Dashboard. Here you can manage schedules, members, and coaches.</p>
+<a class="btn btn-primary" asp-action="Create">Create New Schedule</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Coach</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var schedule in Model)
+    {
+        <tr>
+            <td>@schedule.EventName</td>
+            <td>@schedule.Date.ToShortDateString()</td>
+            <td>@schedule.Location</td>
+            <td>@schedule.Coach.FirstName @schedule.Coach.LastName</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@schedule.ScheduleID">Edit</a>
+                <form asp-action="Delete" asp-route-id="@schedule.ScheduleID" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
